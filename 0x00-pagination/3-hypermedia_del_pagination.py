@@ -5,7 +5,7 @@ Deletion-resilient hypermedia pagination
 
 import csv
 import math
-from typing import List, Dict
+from typing import List, Dict, Union, Tuple
 
 
 class Server:
@@ -39,7 +39,33 @@ class Server:
             }
         return self.__indexed_dataset
 
-    def get_hyper_index(self, index: int = None, page_size: int = 10):
+    def get_page(self, index: Union[int, None] = None,
+                 page_size: int = 10) -> Tuple[int, List[List]]:
+        '''return a page from the dataset and last index'''
         indexed_data = self.indexed_dataset()
-        assert isinstance(index, int) and index <= len(indexed_data) - 1
-        
+        assert isinstance(index, int) and index <= len(indexed_data) - 1\
+            and index >= 0
+        count = 0
+        data = []
+        while count < page_size:
+            if index >= len(indexed_data):
+                break
+            tmp = indexed_data.get(index)
+            if tmp:
+                data.append(tmp)
+                count += 1
+            index += 1
+        return index, data
+
+    def get_hyper_index(self, index: Union[int, None] = None,
+                        page_size: int = 10) -> Dict:
+        '''return delete resilient hypermedia object'''
+        indexed_data = self.indexed_dataset()
+        last_index, data = self.get_page(index, page_size)
+        next_index = last_index
+        return {
+            'index': index,
+            'data': data,
+            'next_index': next_index,
+            'page_size': len(data)
+        }
