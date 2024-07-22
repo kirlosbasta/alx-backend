@@ -43,8 +43,7 @@ class Server:
                  page_size: int = 10) -> Tuple[int, List[List]]:
         '''return a page from the dataset and last index'''
         indexed_data = self.indexed_dataset()
-        assert isinstance(index, int) and index <= len(indexed_data) - 1\
-            and index >= 0
+        assert isinstance(index, int) and index in range(len(indexed_data))
         count = 0
         data = []
         while count < page_size:
@@ -62,7 +61,7 @@ class Server:
         '''return delete resilient hypermedia object'''
         indexed_data = self.indexed_dataset()
         last_index, data = self.get_page(index, page_size)
-        next_index = last_index
+        next_index = index + page_size
         return {
             'index': index,
             'data': data,
