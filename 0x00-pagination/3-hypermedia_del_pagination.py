@@ -57,7 +57,7 @@ class Server:
             index += 1
         return index, data
 
-    def get_hyper_index(self, index: Union[int, None] = None,
+    def get_hyper_index(self, index: int = None,
                         page_size: int = 10) -> Dict:
         '''return delete resilient hypermedia object'''
         indexed_data = self.indexed_dataset()
