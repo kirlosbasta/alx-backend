@@ -45,7 +45,7 @@ class Server:
         assert index in range(len(self.indexed_dataset()))
         next_index = index + page_size
         data = list()
-        for i in range(index, index + page_size):
+        for i in range(index, next_index):
             if not self.indexed_dataset().get(i):
                 next_index += 1
             data.append(self.indexed_dataset().get(i))
