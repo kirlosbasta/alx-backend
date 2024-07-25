@@ -29,7 +29,7 @@ class LRUCache(BaseCaching):
         self.lru = dict()
 
     def put(self, key, item):
-        '''Assigin the value of item to key using LIFO Algorithm'''
+        '''Assigin the value of item to key using LRU Algorithm'''
         if key is None or item is None:
             return
         if len(self.cache_data.keys()) >= self.MAX_ITEMS\
