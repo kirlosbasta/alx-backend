@@ -36,7 +36,7 @@ babel = Babel(app)
 
 
 @babel.localeselector
-def get_locale():
+def get_locale() -> str:
     """
     Select and return best language match based on supported languages
     """
@@ -52,7 +52,7 @@ def get_locale():
 
 
 @babel.timezoneselector
-def get_timezone():
+def get_timezone() -> str:
     '''return the best match for timezone'''
     try:
         timezone = request.args.get('timezone')
