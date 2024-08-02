@@ -57,16 +57,16 @@ def get_timezone():
     try:
         timezone = request.args.get('timezone')
         if timezone:
-            pytz.timezone(timezone)
-            return timezone
+            return pytz.timezone(timezone).zone
+
         user = g.get('user')
         if user:
             timezone = user.get('timezone')
-            pytz.timezone(timezone)
-            return timezone
+            return pytz.timezone(timezone).zone
         return 'UTC'
     except pytz.exceptions.UnknownTimeZoneError:
         return 'UTC'
+
 
 def get_user() -> Union[object, None]:
     '''return a user if found in users or none'''
