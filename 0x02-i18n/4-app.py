@@ -4,10 +4,14 @@
 '''
 from flask import Flask, render_template, request
 from flask_babel import Babel, _
+from typing import Union
+
 
 
 class Config:
-    '''Basic configuration class'''
+    '''
+    Basic configuration class for babel format
+    '''
     LANGUAGES = ['en', 'fr']
     BABEL_DEFAULT_LOCALE = 'en'
     BABEL_DEFAULT_TIMEZONE = 'UTC'
@@ -19,8 +23,10 @@ babel = Babel(app)
 
 
 @babel.localeselector
-def get_locale() -> str | None:
-    '''pick the language match'''
+def get_locale() -> Union[str, None]:
+    '''
+    pick the best language match for each user
+    '''
     locale = request.args.get('locale')
     if locale and locale in app.config['LANGUAGES']:
         return locale
@@ -29,8 +35,10 @@ def get_locale() -> str | None:
 
 @app.route('/')
 def index() -> str:
-    '''render a simple index.html'''
-    return render_template('3-index.html')
+    '''
+    render a simple index.html for the user
+    '''
+    return render_template('4-index.html')
 
 
 if __name__ == '__main__':
