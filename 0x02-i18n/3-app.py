@@ -8,7 +8,9 @@ from typing import Union
 
 
 class Config:
-    '''Basic configuration class'''
+    '''
+    Basic configuration class for babel format
+    '''
     LANGUAGES = ['en', 'fr']
     BABEL_DEFAULT_LOCALE = 'en'
     BABEL_DEFAULT_TIMEZONE = 'UTC'
@@ -21,13 +23,17 @@ babel = Babel(app)
 
 @babel.localeselector
 def get_locale() -> Union[str, None]:
-    '''pick the language match'''
+    '''
+    pick the best language match for each user
+    '''
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
 @app.route('/')
 def index() -> str:
-    '''render a simple index.html'''
+    '''
+    render a simple index.html for the user
+    '''
     return render_template('3-index.html')
 
 
