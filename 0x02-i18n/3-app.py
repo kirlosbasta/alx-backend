@@ -22,14 +22,14 @@ babel = Babel(app)
 
 
 @babel.localeselector
-def get_locale() -> Union[str, None]:
+def get_locale():
     '''
     pick the best language match for each user
     '''
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
-@app.route('/')
+@app.route('/', strict_slashed=False)
 def index() -> str:
     '''
     render a simple index.html for the user
