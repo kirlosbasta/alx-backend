@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 '''3. Parametrize templates'''
 from flask import Flask, render_template, request
-from flask_babel import Babel
+from flask_babel import Babel, _
 
 
 class Config:
