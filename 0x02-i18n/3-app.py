@@ -7,7 +7,7 @@ from flask_babel import Babel, _
 from typing import Union
 
 
-class Config:
+class Config(object):
     '''
     Basic configuration class for babel format
     '''
