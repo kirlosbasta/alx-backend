@@ -29,7 +29,7 @@ def get_locale() -> str:
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
-@app.route('/', strict_slashed=False)
+@app.route('/')
 def index() -> str:
     '''
     render a simple index.html for the user
