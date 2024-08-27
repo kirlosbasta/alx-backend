@@ -5,14 +5,12 @@ const data = {
   message: 'hello world',
 };
 
-const push_notification_code = createQueue();
-const job = push_notification_code
-  .create('push_notification_code', data)
-  .save((err) => {
-    if (!err) {
-      console.log(`Notification job created: ${job.id}`);
-    }
-  });
+const queue = createQueue();
+const job = queue.create('push_notification_code', data).save((err) => {
+  if (!err) {
+    console.log(`Notification job created: ${job.id}`);
+  }
+});
 
 job
   .on('complete', () => {
