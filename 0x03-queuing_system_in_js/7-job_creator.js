@@ -54,7 +54,7 @@ for (const job of jobs) {
       console.log(`Notification job created: ${j.id}`);
     }
   });
-  j.on('compelte', () => {
+  j.on('complete', () => {
     console.log(`Notification job ${j.id} completed`);
   })
     .on('failed', (err) => {
